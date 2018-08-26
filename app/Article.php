@@ -8,6 +8,11 @@ class Article extends Model
 {
     use Sluggable;
 
+    protected $guarded= [];
+
+    protected $casts = [
+        'images' =>'array'
+    ];
     public function sluggable()
     {
         return [

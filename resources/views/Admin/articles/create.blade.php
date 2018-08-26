@@ -1,5 +1,15 @@
 @extends('Admin.master')
 
+@section('script')
+<script src="/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('body', {
+        filebrowserUploadUrl: '/admin/panel/upload-image',
+        filebrowserImageUploadUrl: '/admin/panel/upload-image',
+    });
+</script>
+@endsection
+
 @section('content')
 
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -20,13 +30,13 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <label for="description" class="control-label">توضیحات کوتاه</label>
-                    <textarea rows="5" class="form-control" name="description" id="description" placeholder="توضیحات را وارد کنید"  ></textarea>
+                    <textarea rows="5" class="form-control" name="description" id="description" placeholder="توضیحات را وارد کنید"  >{{old('description')}}</textarea>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
                     <label for="body" class="control-label">متن</label>
-                    <textarea rows="5" class="form-control" name="body" id="body" placeholder="متن مقاله را وارد کنید"></textarea>
+                    <textarea rows="5" class="form-control" name="body" id="body" placeholder="متن مقاله را وارد کنید">{{old('body')}}</textarea>
                 </div>
             </div>
             <div class="form-group">

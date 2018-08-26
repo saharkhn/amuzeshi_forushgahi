@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,9 +40,16 @@ class ArticleController extends AdminController
      */
     public function store(ArticleRequest $request)
     {
+//        return User::create([
+//            'level' => 'admin' ,
+//            'name' => 'sara',
+//            'email' => 'saharkh76.b@gmail.com',
+//            'password' => bcrypt('sahar1376')
+//        ]);
+        auth()->loginUsingId(1);
         $file = $request->file('images');
-        $imageUrl = $this->uploadImage($file);
-       // auth()->user()->article()->create(array_image(['images' => $imageUrl]));
+        $imagesUrl = $this->uploadImages($file);
+        auth()->user()->article()->create(array_merge($request->all() , [ 'images' => $imagesUrl]));
         return redirect(route('articles.index'));
     }
 
@@ -64,7 +72,7 @@ class ArticleController extends AdminController
      */
     public function edit(Article $article)
     {
-        //
+        return view('Admin.articles.edit' , compact('article'));
     }
 
     /**
@@ -74,9 +82,20 @@ class ArticleController extends AdminController
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
+        $file = $request->file('images');
+        $inputs = $request->all();
+        if($file){
+            $inputs['images'] = $this->uploadImages($request->file('images'));
+        }else{
+            $inputs['images'] = $article->images;
+            $inputs['images']['thumb']=$inputs['imagesThumb'];
+        }
+        unset($inputs['imagesThumb']);
+        $article->update($inputs);
+
+        return redirect(route('articles.index'));
     }
 
     /**
@@ -87,6 +106,7 @@ class ArticleController extends AdminController
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect(route('articles.index'));
     }
 }

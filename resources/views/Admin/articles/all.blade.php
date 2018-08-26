@@ -30,17 +30,19 @@
                                     {{method_field('delete')}}
                                     {{csrf_field()}}
                                     <div class="btn-group btn-group-xs">
-                                        <a href="{{route('articles.edit ' , ['id'=>$article->id])}}" class="btn btn-primary">ویرایش</a>
+                                        <a href="{{route('articles.edit' , ['id'=>$article->id])}}" class="btn btn-primary">ویرایش</a>
                                         <button type="submit" class="btn btn-danger">حذف</button>
                                     </div>
                                 </form>
                             </td>
-                            <td>sit</td>
                         </tr>
                      @endforeach
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div style="text-align: center">
+            {!! $articles->render() !!}
         </div>
     </div>
 
