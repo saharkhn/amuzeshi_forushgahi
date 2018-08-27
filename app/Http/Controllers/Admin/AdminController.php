@@ -38,7 +38,7 @@ class AdminController extends Controller
 
     protected function setCourseTime($episode){
         $course = $episode->course;
-        $course->time = $this->getCourseTime($course->episode->pluck('time'));
+        $course->time = $this->getCourseTime($course->episodes->pluck('time'));
         $course->save();
     }
 
@@ -46,7 +46,7 @@ class AdminController extends Controller
     {
         $timestamp = Carbon::parse('00:00:00');
         foreach($times as $t){
-            $time = strlen($t) == 5 ? strtotime('00'.$t) : strtotime($t);
+            $time = strlen($t) == 5 ? strtotime('00:'.$t) : strtotime($t);
             $timestamp->addSecond($time);
         }
         return $timestamp->format('H:i:s');

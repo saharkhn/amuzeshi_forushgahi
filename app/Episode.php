@@ -11,4 +11,8 @@ class Episode extends Model
     public function course(){
         return $this->belongsTo(Course::class);
     }
+
+    public function path(){
+        return "/episode/{$this->course->slug}/episode/{$this->number}" ;
+    }
 }

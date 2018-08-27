@@ -25,7 +25,7 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <label for="title" class="control-label">عنوان مقاله</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="عنوان را وارد کنید" value={{$article->title}}>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="عنوان را وارد کنید" value="{{$article->title}}">
                 </div>
             </div>
             <div class="form-group">
@@ -62,7 +62,7 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label for="tags" class="control-label">تگ ها</label>
-                    <input type="text" class="form-control" name="tags" id="tags" placeholder="تگ ها را وارد کنید" value={{$article->tags}}>
+                    <input type="text" class="form-control" name="tags" id="tags" placeholder="تگ ها را وارد کنید" value="{{$article->tags}}">
                 </div>
             </div>
             <div class="form-group">

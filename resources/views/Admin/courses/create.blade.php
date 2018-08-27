@@ -16,7 +16,7 @@
 
         <div class="page-header head-section">
             <h2>ایجاد  دوره جدید</h2>
-            <a href="{{route('courses.create')}}" class="btn btn-sm btn-primary">ارسال مقاله</a>
+            <a href="{{route('courses.create')}}" class="btn btn-sm btn-primary">ارسال دوره</a>
         </div>
         <form class="form-horizontal" action="{{route('courses.store')}}" method="post" enctype="multipart/form-data">
             {{csrf_field()}}

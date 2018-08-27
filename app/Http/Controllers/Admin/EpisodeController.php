@@ -61,9 +61,9 @@ class EpisodeController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Episode $episode)
     {
-        //
+        return view('Admin.episodes.edit',compact('episode'));
     }
 
     /**
@@ -73,9 +73,12 @@ class EpisodeController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EpisodeRequest $request, Episode $episode)
     {
-        //
+        $episode->update($request->all());
+        $this->setCourseTime($episode);
+
+        return redirect(route('episodes.index'));
     }
 
     /**
@@ -84,8 +87,9 @@ class EpisodeController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Episode $episode)
     {
-        //
+        $episode->delete();
+        return redirect(route('episodes.index'));
     }
 }
